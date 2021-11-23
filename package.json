@@ -6,6 +6,12 @@
   "scripts": {
     "test": "jest"
   },
+  "jest": {
+    "rootDir": "./",
+    "testPathIgnorePatterns": ["/node_modules/", "__tests__/mock/*"],
+    "collectCoverage": true,
+    "coverageReporters": ["html", "text-summary"]
+  },
   "keywords": [
     "gas",
     "google app script",
@@ -17,5 +23,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/me-nkr/gas-module.git"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.0.3"
   }
 }
