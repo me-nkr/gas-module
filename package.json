@@ -6,6 +6,16 @@
   "scripts": {
     "test": "jest"
   },
+  "keywords": [
+    "gas",
+    "google app script",
+    "module",
+    "gas module"
+  ],
   "author": "Naveen K R",
-  "license": "ISC"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/me-nkr/gas-module.git"
+  }
 }
