@@ -1,0 +1,11 @@
+{
+  "name": "gas-module",
+  "version": "1.0.0",
+  "description": "Import google app script modules to run locally for testing and stuff.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Naveen K R",
+  "license": "ISC"
+}
