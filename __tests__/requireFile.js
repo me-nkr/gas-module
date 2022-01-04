@@ -1,5 +1,4 @@
 const { requireFile } = require('../src');
-const fs = require('fs');
 
 describe('Single File', () => {
     it('should throw error if file name is not a string', () => {
@@ -21,8 +20,8 @@ describe('Single File', () => {
     
     describe('On Success', () => {
         const oneResult = requireFile('./__tests__/mocks/one.js');
-        const onejs = fs.readFileSync('./__tests__/mocks/one.js', 'utf8');
         const twoResult = requireFile('./__tests__/mocks/two.js');
+        const onejs = 'function uno() {\n   console.log(\'uno\');\n}';
         const twojs = {
             duo: 'function duo() {\n   console.log(\'duo\');\n}',
             dos: 'function dos() {\n   console.log(\'dos\');\n}'
