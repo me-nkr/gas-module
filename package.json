@@ -4,7 +4,8 @@
   "description": "Import google app script modules to run locally for testing and stuff.",
   "main": "src/index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "testsum": "jest 2>&1 | grep '●' | cat -n"
   },
   "jest": {
     "rootDir": "./",

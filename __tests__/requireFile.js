@@ -2,20 +2,20 @@ const { requireFile } = require('../src');
 
 describe('Single File', () => {
     it('should throw error if file name is not a string', () => {
-       expect(requireFile(25)).toThrowError('fileName: Expected string, number given'); 
-       expect(requireFile()).toThrowError('fileName: Expected string, undefined given'); 
-       expect(requireFile([])).toThrowError('fileName: Expected string, object given'); 
-       expect(requireFile({})).toThrowError('fileName: Expected string, object given'); 
-       expect(requireFile(true)).toThrowError('fileName: Expected string, boolean given'); 
-       expect(requireFile(false)).toThrowError('fileName: Expected string, boolean given'); 
+       expect(() => requireFile(25)).toThrowError('fileName: Expected string, number given'); 
+       expect(() => requireFile()).toThrowError('fileName: Expected string, undefined given'); 
+       expect(() => requireFile([])).toThrowError('fileName: Expected string, object given'); 
+       expect(() => requireFile({})).toThrowError('fileName: Expected string, object given'); 
+       expect(() => requireFile(true)).toThrowError('fileName: Expected string, boolean given'); 
+       expect(() => requireFile(false)).toThrowError('fileName: Expected string, boolean given'); 
     });
     it('should throw error on non \'.js\' or \'.ts\' file name', () => {
-        expect(requireFile('test.txt')).toThrowError('fileName: Invalid file type');
-        expect(requireFile('test.json')).toThrowError('fileName: Invalid file type');
-        expect(requireFile('test.c')).toThrowError('fileName: Invalid file type');
+        expect(() => requireFile('test.txt')).toThrowError('fileName: Invalid file type');
+        expect(() => requireFile('test.json')).toThrowError('fileName: Invalid file type');
+        expect(() => requireFile('test.c')).toThrowError('fileName: Invalid file type');
     });
     it('should throw error when given file does\'nt exist', () => {
-        expect(requireFile('nonExisting.js')).toThrowError('fileName: file not found')
+        expect(() => requireFile('nonExisting.js')).toThrowError('fileName: file not found')
     });
     
     describe('On Success', () => {
