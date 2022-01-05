@@ -15,19 +15,20 @@ describe('Single File', () => {
         expect(() => requireFile('test.c')).toThrowError('fileName: Invalid file type');
     });
     it('should throw error when given file does\'nt exist', () => {
-        expect(() => requireFile('nonExisting.js')).toThrowError('fileName: file not found')
+        expect(() => requireFile('nonExisting.js')).toThrowError('fileName: File not found')
     });
     
     describe('On Success', () => {
         const oneResult = requireFile('./__tests__/mocks/one.js');
         const twoResult = requireFile('./__tests__/mocks/two.js');
-        const onejs = 'function uno() {\n   console.log(\'uno\');\n}';
+        const onejs = 'function uno() {\n    console.log(\'uno\');\n}';
         const twojs = {
-            duo: 'function duo() {\n   console.log(\'duo\');\n}',
-            dos: 'function dos() {\n   console.log(\'dos\');\n}'
+            duo: 'function duo() {\n    console.log(\'duo\');\n}',
+            dos: 'function dos() {\n    console.log(\'dos\');\n}'
         }
         it('should return an object', () => {
-            expect(typeof result).toBe('object');
+            expect(typeof oneResult).toBe('object');
+            expect(typeof twoResult).toBe('object');
         });
         it('should have all the functions in the file', () => {
             expect(oneResult).toHaveProperty('uno');
