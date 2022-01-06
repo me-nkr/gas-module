@@ -9,7 +9,7 @@
   },
   "jest": {
     "rootDir": "./",
-    "testPathIgnorePatterns": ["/node_modules/", "__tests__/mock/*"],
+    "testPathIgnorePatterns": ["/node_modules/", "__tests__/mocks/*"],
     "collectCoverage": true,
     "coverageReporters": ["html", "text-summary"]
   },
