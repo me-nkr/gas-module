@@ -1,6 +1,6 @@
 {
   "name": "gas-module",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Import google app script modules to run locally for testing and stuff.",
   "main": "src/index.js",
   "scripts": {
@@ -9,9 +9,15 @@
   },
   "jest": {
     "rootDir": "./",
-    "testPathIgnorePatterns": ["/node_modules/", "__tests__/mocks/*"],
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "__tests__/mocks/*"
+    ],
     "collectCoverage": true,
-    "coverageReporters": ["html", "text-summary"]
+    "coverageReporters": [
+      "html",
+      "text-summary"
+    ]
   },
   "keywords": [
     "gas",
