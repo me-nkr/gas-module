@@ -14,16 +14,14 @@ module.exports = (file, options = {}) => {
     try {
         const code = fs.readFileSync(file, 'utf8');
         const context = options.mocks ? vm.createContext(options.mocks) : vm.createContext({});
-        try {
-            vm.runInContext(code, context);
-        }
-        catch (error) {
-            throw error;
-        }
+
+        vm.runInContext(code, context);
 
         return context;
     }
     catch (error) {
         if (error.code === 'ENOENT') throw Error('fileName: File not found');
+        if (/is\snot\sdefined$/.test(error.message)) throw Error(`ReferenceError: ${error.message} \n you can pass in mocks for testing tho`);
+        throw error;
     }
 }

@@ -35,6 +35,9 @@ describe('Single File', () => {
     it('should throw error when given file does\'nt exist', () => {
         expect(() => requireFile('nonExisting.js')).toThrowError('fileName: File not found')
     });
+    it('should throw error when undefined variable is referenced', () => {
+        expect(() => requireFile('./__tests__/mocks/depenDir/deep/first.js')).toThrowError('ReferenceError: invalid is not defined \n you can pass in mocks for testing tho');
+    })
 
     describe('On Success', () => {
         const oneResult = requireFile('./__tests__/mocks/one.js');
