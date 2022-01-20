@@ -13,7 +13,7 @@ module.exports = (file, options = {}) => {
     if (!/(\.js|\.ts)$/.test(file)) throw Error('fileName: Invalid file type');
     try {
         const code = fs.readFileSync(file, 'utf8');
-        const context = vm.createContext({});
+        const context = options.mocks ? vm.createContext(options.mocks) : vm.createContext({});
         try {
             vm.runInContext(code, context);
         }

@@ -56,5 +56,24 @@ describe('Single File', () => {
             expect(twoResult.duo.toString()).toBe(twojs.duo);
             expect(twoResult.dos.toString()).toBe(twojs.dos);
         });
+        describe('With mocks', () => {
+            const mocks = {
+                editor: 'vscode',
+                hotel: 'trivago'
+            }
+            const result = requireFile('./__tests__/mocks/zero.ts', { mocks: mocks });
+
+            const zerots = 'function nada() {\n    console.log(\'nada\');\n}';
+
+            it('should have properties form mocks in returning object', () => {
+                expect(result).toHaveProperty('editor');
+                expect(result.editor).toBe(mocks.editor);
+                expect(result).toHaveProperty('hotel');
+                expect(result.hotel).toBe(mocks.hotel);
+                expect(result).toHaveProperty('nada');
+                expect(result.nada.toString()).toBe(zerots);
+
+            })
+        })
     });
 });
