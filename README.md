@@ -15,6 +15,8 @@ $ npm install gas-module
 `requireFile()`
 -
 - `fileName` - name or path of file to be imported
+- `options` (optional)
+    - `mocks` - object containing mock variables and functions
 
 `requireDir()`
 -
@@ -22,11 +24,13 @@ $ npm install gas-module
 - `recursion`
     - `true` to import files from subdirectories too
     - `false` to ignore subdirectories
-- `options`
+- `options` (optional)
     - `filterExtension`
         - `['.js']` for files with .js extension (default if left `undefined`)
         - `['.ts']` for files with .ts extension
         - `['.js', '.ts']` for files with .js and .ts extensions
+    - `mocks` - object containing mock variables and functions
+    - `order` - array of filenames in desired order of execusion, if there is files that is not in the array, it will be executed after
 
 ## Example
 
@@ -40,6 +44,26 @@ const file = requireFile('filename.js');
 //run function defined in file
 
 file.myFunction();
+```
+
+#### import with mocks
+
+```js
+const { requireFile } = require('gas-module');
+
+const mock = {
+    editor: 'vscode',
+    hotel: 'trivago'
+}
+const file = requireFile('filename.js', { mocks: mock});
+
+// run function defined in file
+
+file.myFunction();
+
+// use mock varibale
+
+console.log(file.editor);
 ```
 
 ### import a directory
@@ -78,4 +102,24 @@ const functions = requireDir('directoryname', true, { filterExtension: ['.js', '
 // run function defined in any file
 
 functions.myFunction();
+```
+
+#### import with mocks
+
+```js
+const { requireDir } = require('gas-module');
+
+const mock = {
+    editor: 'vscode',
+    hotel: 'trivago'
+}
+const file = requireDir('directoryname', false, { mocks: mock});
+
+// run function defined in file
+
+file.myFunction();
+
+// use mock varibale
+
+console.log(file.editor);
 ```
