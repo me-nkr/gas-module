@@ -246,4 +246,17 @@ describe('Directory', () => {
         });
 
     });
+
+    describe('On files having dependancy in other files', () => {
+        describe('On Error', () => {
+            it.todo('should throw error when undefined variable is referenced');
+            it.todo('should throw error when variable defined, in another file that is not executed yet, is referenced');
+        });
+
+        describe('On Success', () => {
+            it.todo('should have properties of mock object in returning object');
+            it.todo('should execute dependant file without error');
+            it.todo('should execute files in order')
+        });
+    });
 });
