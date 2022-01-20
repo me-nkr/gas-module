@@ -249,14 +249,73 @@ describe('Directory', () => {
 
     describe('On files having dependancy in other files', () => {
         describe('On Error', () => {
-            it.todo('should throw error when undefined variable is referenced');
-            it.todo('should throw error when variable defined, in another file that is not executed yet, is referenced');
+            it('should throw error when undefined variable is referenced', () => {
+                expect(() => requireDir('./__tests__/mocks/depenDir/deep/')).toThrowError('ReferenceError : \'invalid\' is not defined \n this might be because file, which defined \'invalid\', have not executed yet');
+
+            });
+            it('should throw error when variable defined, in another file that is not executed yet, is referenced', () => {
+                expect(() => requireDir('./__tests__/mocks/depenDir/')).toThrowError('ReferenceError : \'midvar\' is not defined \n this might be because file, which defined \'midvar\', have not executed yet');
+
+            });
         });
 
         describe('On Success', () => {
-            it.todo('should have properties of mock object in returning object');
-            it.todo('should execute dependant file without error');
-            it.todo('should execute files in order')
+            it('should have properties of mock object in returning object', () => {
+                const mocks = {
+                    editor: 'vscode',
+                    hotel: 'trivago'
+                };
+                const onejs = 'function uno() {\n    console.log(\'uno\');\n}';
+                const result = requireDir('./__tests__/mocks/validDir/', false, { mocks });
+
+                expect(result).toHaveProperty('editor');
+                expect(result.editor).toBe(mocks.editor);
+                expect(result).toHaveProperty('hotel');
+                expect(result.editor).toBe(mocks.hotel);
+                expect(result).toHaveProperty('one');
+                expect(result.one).toBe(onejs);
+            });
+            it('should execute dependant file without error', () => {
+                let result;
+                expect(() => result = requireDir('./__tests__/mocks/depenDir/deep/', false, {
+                    order: [
+                        'second.js',
+                        'first.js'
+                    ]
+                })).not.toThrowError();
+
+                expect(result).toHaveProperty('invalid');
+                expect(result.invalid).toBe('mock');
+                expect(result).toHaveProperty('single');
+                expect(result.single).toBe('mock');
+            });
+            it('should execute files in order', () => {
+                let result;
+                expect(() => result = requireDir('./__tests__/mocks/depenDir/', false, {
+                    order: [
+                        'top.js',
+                        'mid.js'
+                    ]
+                })).not.toThrowError();
+
+                expect(result).toHaveProperty('topvar');
+                expect(result.topvar).toBe('top');
+                expect(result).toHaveProperty('topfun');
+                expect(result.topfun()).toBe('top');
+                expect(result).toHaveProperty('midvar');
+                expect(result.midvar).toBe('mid');
+                expect(result).toHaveProperty('midfun');
+                expect(result.midfun()).toBe('top');
+                expect(result).toHaveProperty('secfun');
+                expect(result.secfun()).toBe(true);
+                expect(result).toHaveProperty('botvar');
+                expect(result.botvar).toBe('mid');
+                expect(result).toHaveProperty('botfun');
+                expect(result.botfun()).toBe('yin');
+                expect(result).toHaveProperty('lastfun');
+                expect(result.lastfun()).toBe('top');
+
+            })
         });
     });
 });
