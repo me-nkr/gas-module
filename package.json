@@ -1,6 +1,6 @@
 {
   "name": "gas-module",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Import local google appscript files written with .js or .ts extension for testing",
   "main": "src/index.js",
   "scripts": {
@@ -15,10 +15,10 @@
     ],
     "collectCoverage": true,
     "collectCoverageFrom": [
-    "**/src/*.{js,ts}",
-    "!**/node_modules/**",
-    "!**/vendor/**"
-  ],
+      "**/src/*.{js,ts}",
+      "!**/node_modules/**",
+      "!**/vendor/**"
+    ],
     "coverageReporters": [
       "html",
       "text-summary"
