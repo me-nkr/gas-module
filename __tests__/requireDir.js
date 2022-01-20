@@ -252,44 +252,44 @@ describe('Directory', () => {
         describe('On Error', () => {
 
             it('should throw error if options.mocks is not an object or undefined', () => {
-                expect(() => requireDir('./__tests__/mocks/depenDir', false, { mocks: 'mock' })).toThrowError('mocks: Expected object, string given');
-                expect(() => requireDir('./__tests__/mocks/depenDir', false, { mocks: 25 })).toThrowError('mocks: Expected object, number given');
-                expect(() => requireDir('./__tests__/mocks/depenDir', false, { mocks: [] })).toThrowError('mocks: Expected object, array given');
-                expect(() => requireDir('./__tests__/mocks/depenDir', false, { mocks: true })).toThrowError('mocks: Expected object, boolean given');
-                expect(() => requireDir('./__tests__/mocks/depenDir', false, { mocks: false })).toThrowError('mocks: Expected object, boolean given');
-                expect(() => requireDir('./__tests__/mocks/depenDir', false, { mocks: undefined })).not.toThrowError();
+                expect(() => requireDir('./__tests__/mocks/validDir', false, { mocks: 'mock' })).toThrowError('mocks: Expected object, string given');
+                expect(() => requireDir('./__tests__/mocks/validDir', false, { mocks: 25 })).toThrowError('mocks: Expected object, number given');
+                expect(() => requireDir('./__tests__/mocks/validDir', false, { mocks: [] })).toThrowError('mocks: Expected object, array given');
+                expect(() => requireDir('./__tests__/mocks/validDir', false, { mocks: true })).toThrowError('mocks: Expected object, boolean given');
+                expect(() => requireDir('./__tests__/mocks/validDir', false, { mocks: false })).toThrowError('mocks: Expected object, boolean given');
+                expect(() => requireDir('./__tests__/mocks/validDir', false, { mocks: undefined })).not.toThrowError();
             });
 
             it('should throw error if options.order is not an array or undefined', () => {
-                expect(() => requireDir('./__tests__/order/depenDir', false, { order: 'order' })).toThrowError('order: Expected array, string given');
-                expect(() => requireDir('./__tests__/order/depenDir', false, { order: 25 })).toThrowError('order: Expected array, number given');
-                expect(() => requireDir('./__tests__/order/depenDir', false, { order: {} })).toThrowError('order: Expected array, object given');
-                expect(() => requireDir('./__tests__/order/depenDir', false, { order: true })).toThrowError('order: Expected array, boolean given');
-                expect(() => requireDir('./__tests__/order/depenDir', false, { order: false })).toThrowError('order: Expected array, boolean given');
-                expect(() => requireDir('./__tests__/mocks/depenDir', false, { order: undefined })).not.toThrowError();
-                expect(() => requireDir('./__tests__/mocks/depenDir', false, { order: [] })).not.toThrowError();
+                expect(() => requireDir('./__tests__/mocks/validDir', false, { order: 'order' })).toThrowError('order: Expected array, string given');
+                expect(() => requireDir('./__tests__/mocks/validDir', false, { order: 25 })).toThrowError('order: Expected array, number given');
+                expect(() => requireDir('./__tests__/mocks/validDir', false, { order: {} })).toThrowError('order: Expected array, object given');
+                expect(() => requireDir('./__tests__/mocks/validDir', false, { order: true })).toThrowError('order: Expected array, boolean given');
+                expect(() => requireDir('./__tests__/mocks/validDir', false, { order: false })).toThrowError('order: Expected array, boolean given');
+                expect(() => requireDir('./__tests__/mocks/validDir', false, { order: undefined })).not.toThrowError();
+                expect(() => requireDir('./__tests__/mocks/validDir', false, { order: [] })).not.toThrowError();
             });
 
             it('should throw error if options.order contains a non string value', () => {
-                expect(() => requireDir('./__tests__/mocks/depenDir', false, { order: [undefined] })).toThrowError('order: Expected string, undefined given');
-                expect(() => requireDir('./__tests__/mocks/depenDir', false, { order: [23] })).toThrowError('order: Expected string, number given');
-                expect(() => requireDir('./__tests__/mocks/depenDir', false, { order: [{}] })).toThrowError('order: Expected string, object given');
-                expect(() => requireDir('./__tests__/mocks/depenDir', false, { order: [[]] })).toThrowError('order: Expected string, array given');
-                expect(() => requireDir('./__tests__/mocks/depenDir', false, { order: [true] })).toThrowError('order: Expected string, boolean given');
-                expect(() => requireDir('./__tests__/mocks/depenDir', false, { order: [false] })).toThrowError('order: Expected string, boolean given');
+                expect(() => requireDir('./__tests__/mocks/validDir', false, { order: [undefined] })).toThrowError('order: invalid filename given');
+                expect(() => requireDir('./__tests__/mocks/validDir', false, { order: [23] })).toThrowError('order: invalid filename given');
+                expect(() => requireDir('./__tests__/mocks/validDir', false, { order: [{}] })).toThrowError('order: invalid filename given');
+                expect(() => requireDir('./__tests__/mocks/validDir', false, { order: [[]] })).toThrowError('order: invalid filename given');
+                expect(() => requireDir('./__tests__/mocks/validDir', false, { order: [true] })).toThrowError('order: invalid filename given');
+                expect(() => requireDir('./__tests__/mocks/validDir', false, { order: [false] })).toThrowError('order: invalid filename given');
             });
 
             it('should throw error if options.order contains a non-existing filename', () => {
-                expect(() => requireDir('./__tests__/mocks/depenDir', false, { order: ['invalidFile'] })).toThrowError('order: invalidFile does not exist');
+                expect(() => requireDir('./__tests__/mocks/validDir', false, { order: ['invalidFile'] })).toThrowError('order: invalidFile does not exist');
             });
 
             it('should throw error when undefined variable is referenced', () => {
-                expect(() => requireDir('./__tests__/mocks/depenDir/deep/')).toThrowError('ReferenceError : \'invalid\' is not defined \n this might be because file, which defined \'invalid\', have not executed yet');
+                expect(() => requireDir('./__tests__/mocks/depenDir/deep/')).toThrowError('ReferenceError: invalid is not defined \n this might be because file, which defined the variable, have not executed yet');
 
             });
 
             it('should throw error when variable defined, in another file that is not executed yet, is referenced', () => {
-                expect(() => requireDir('./__tests__/mocks/depenDir/')).toThrowError('ReferenceError : \'midvar\' is not defined \n this might be because file, which defined \'midvar\', have not executed yet');
+                expect(() => requireDir('./__tests__/mocks/depenDir/')).toThrowError('ReferenceError: midvar is not defined \n this might be because file, which defined the variable, have not executed yet');
 
             });
         });
@@ -306,16 +306,16 @@ describe('Directory', () => {
                 expect(result).toHaveProperty('editor');
                 expect(result.editor).toBe(mocks.editor);
                 expect(result).toHaveProperty('hotel');
-                expect(result.editor).toBe(mocks.hotel);
-                expect(result).toHaveProperty('one');
-                expect(result.one).toBe(onejs);
+                expect(result.hotel).toBe(mocks.hotel);
+                expect(result).toHaveProperty('uno');
+                expect(result.uno.toString()).toBe(onejs);
             });
             it('should execute dependant file without error', () => {
                 let result;
                 expect(() => result = requireDir('./__tests__/mocks/depenDir/deep/', false, {
                     order: [
-                        'second.js',
-                        'first.js'
+                        './__tests__/mocks/depenDir/deep/second.js',
+                        './__tests__/mocks/depenDir/deep/first.js'
                     ]
                 })).not.toThrowError();
 
@@ -328,8 +328,8 @@ describe('Directory', () => {
                 let result;
                 expect(() => result = requireDir('./__tests__/mocks/depenDir/', false, {
                     order: [
-                        'top.js',
-                        'mid.js'
+                        './__tests__/mocks/depenDir/top.js',
+                        './__tests__/mocks/depenDir/mid.js'
                     ]
                 })).not.toThrowError();
 

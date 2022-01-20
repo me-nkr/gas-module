@@ -5,8 +5,8 @@ function botfun() {
 }
 function lastfun() {
     if ( topfun() === topvar ) {
-        if ( midvar() === botvar() ) {
-            if ( botfun() === true && secfun() === true ) {
+        if ( midvar === botvar ) {
+            if ( botfun() === 'yin' && secfun() === true ) {
                 return midfun();
             }
         }
