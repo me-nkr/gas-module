@@ -22,30 +22,31 @@ describe('Directory', () => {
         expect(() => requireDir('./__tests__/mocks/validDir', 'true')).toThrowError('recursion: Expected boolean, string given');
         expect(() => requireDir('./__tests__/mocks/validDir', 'false')).toThrowError('recursion: Expected boolean, string given');
     });
-    it('should throw error if options is not an object', () => {
+    it('should throw error if options is not an object or undefined', () => {
         expect(() => requireDir('./__tests__/mocks/validDir', false, 25)).toThrowError('options: Expected object, number given');
         expect(() => requireDir('./__tests__/mocks/validDir', false, [])).toThrowError('options: Expected object, array given');
         expect(() => requireDir('./__tests__/mocks/validDir', false, '')).toThrowError('options: Expected object, string given');
         expect(() => requireDir('./__tests__/mocks/validDir', false, true)).toThrowError('options: Expected object, boolean given');
         expect(() => requireDir('./__tests__/mocks/validDir', false, false)).toThrowError('options: Expected object, boolean given');
     });
-    it('should throw error if options.filterExtention is not an array', () => {
-        expect(() => requireDir('./__tests__/mocks/validDir', false, { filterExtension: '.js' })).toThrowError('options: Expected array, string given');
-        expect(() => requireDir('./__tests__/mocks/validDir', false, { filterExtension: 25 })).toThrowError('options: Expected array, number given');
-        expect(() => requireDir('./__tests__/mocks/validDir', false, { filterExtension: {} })).toThrowError('options: Expected array, object given');
-        expect(() => requireDir('./__tests__/mocks/validDir', false, { filterExtension: true })).toThrowError('options: Expected array, boolean given');
-        expect(() => requireDir('./__tests__/mocks/validDir', false, { filterExtension: false })).toThrowError('options: Expected array, boolean given');
+    it('should throw error if options.filterExtention is not an array or undefined', () => {
+        expect(() => requireDir('./__tests__/mocks/validDir', false, { filterExtension: '.js' })).toThrowError('filterExtension: Expected array, string given');
+        expect(() => requireDir('./__tests__/mocks/validDir', false, { filterExtension: 25 })).toThrowError('filterExtension: Expected array, number given');
+        expect(() => requireDir('./__tests__/mocks/validDir', false, { filterExtension: {} })).toThrowError('filterExtension: Expected array, object given');
+        expect(() => requireDir('./__tests__/mocks/validDir', false, { filterExtension: true })).toThrowError('filterExtension: Expected array, boolean given');
+        expect(() => requireDir('./__tests__/mocks/validDir', false, { filterExtension: false })).toThrowError('filterExtension: Expected array, boolean given');
     });
     it('should throw error if options.filterExtention is neither of [\'.js\'], [\'.ts\'], [\'.js\', \'.ts\'] or undefined', () => {
-        expect(() => requireDir('./__tests__/mocks/validDir', false, { filterExtension: ['c'] })).toThrowError('options: invalid file type');
-        expect(() => requireDir('./__tests__/mocks/validDir', false, { filterExtension: [25] })).toThrowError('options: invalid file type');
-        expect(() => requireDir('./__tests__/mocks/validDir', false, { filterExtension: [{}] })).toThrowError('options: invalid file type');
-        expect(() => requireDir('./__tests__/mocks/validDir', false, { filterExtension: [true] })).toThrowError('options: invalid file type');
-        expect(() => requireDir('./__tests__/mocks/validDir', false, { filterExtension: [] })).toThrowError('options: invalid file type');
-        expect(() => requireDir('./__tests__/mocks/validDir', false, { filterExtension: [[]] })).toThrowError('options: invalid file type');
-        expect(() => requireDir('./__tests__/mocks/validDir', false, { filterExtension: ['.js', '.ts', '.ss'] })).toThrowError('options: invalid file type');
+        expect(() => requireDir('./__tests__/mocks/validDir', false, { filterExtension: ['c'] })).toThrowError('filterExtension: invalid file type');
+        expect(() => requireDir('./__tests__/mocks/validDir', false, { filterExtension: [25] })).toThrowError('filterExtension: invalid file type');
+        expect(() => requireDir('./__tests__/mocks/validDir', false, { filterExtension: [{}] })).toThrowError('filterExtension: invalid file type');
+        expect(() => requireDir('./__tests__/mocks/validDir', false, { filterExtension: [true] })).toThrowError('filterExtension: invalid file type');
+        expect(() => requireDir('./__tests__/mocks/validDir', false, { filterExtension: [] })).toThrowError('filterExtension: invalid file type');
+        expect(() => requireDir('./__tests__/mocks/validDir', false, { filterExtension: [[]] })).toThrowError('filterExtension: invalid file type');
+        expect(() => requireDir('./__tests__/mocks/validDir', false, { filterExtension: ['.js', '.ts', '.ss'] })).toThrowError('filterExtension: invalid file type');
         expect(() => requireDir('./__tests__/mocks/validDir', false, { filterExtension: undefined })).not.toThrowError();
     });
+
 
     describe('On Sucess', () => {
         const result = requireDir('./__tests__/mocks/validDir', false, { filterExtension: ['.js', '.ts'] });
@@ -245,5 +246,111 @@ describe('Directory', () => {
             });
         });
 
+    });
+
+    describe('On files having dependancy in other files', () => {
+        describe('On Error', () => {
+
+            it('should throw error if options.mocks is not an object or undefined', () => {
+                expect(() => requireDir('./__tests__/mocks/validDir', false, { mocks: 'mock' })).toThrowError('mocks: Expected object, string given');
+                expect(() => requireDir('./__tests__/mocks/validDir', false, { mocks: 25 })).toThrowError('mocks: Expected object, number given');
+                expect(() => requireDir('./__tests__/mocks/validDir', false, { mocks: [] })).toThrowError('mocks: Expected object, array given');
+                expect(() => requireDir('./__tests__/mocks/validDir', false, { mocks: true })).toThrowError('mocks: Expected object, boolean given');
+                expect(() => requireDir('./__tests__/mocks/validDir', false, { mocks: false })).toThrowError('mocks: Expected object, boolean given');
+                expect(() => requireDir('./__tests__/mocks/validDir', false, { mocks: undefined })).not.toThrowError();
+            });
+
+            it('should throw error if options.order is not an array or undefined', () => {
+                expect(() => requireDir('./__tests__/mocks/validDir', false, { order: 'order' })).toThrowError('order: Expected array, string given');
+                expect(() => requireDir('./__tests__/mocks/validDir', false, { order: 25 })).toThrowError('order: Expected array, number given');
+                expect(() => requireDir('./__tests__/mocks/validDir', false, { order: {} })).toThrowError('order: Expected array, object given');
+                expect(() => requireDir('./__tests__/mocks/validDir', false, { order: true })).toThrowError('order: Expected array, boolean given');
+                expect(() => requireDir('./__tests__/mocks/validDir', false, { order: false })).toThrowError('order: Expected array, boolean given');
+                expect(() => requireDir('./__tests__/mocks/validDir', false, { order: undefined })).not.toThrowError();
+                expect(() => requireDir('./__tests__/mocks/validDir', false, { order: [] })).not.toThrowError();
+            });
+
+            it('should throw error if options.order contains a non string value', () => {
+                expect(() => requireDir('./__tests__/mocks/validDir', false, { order: [undefined] })).toThrowError('order: invalid filename given');
+                expect(() => requireDir('./__tests__/mocks/validDir', false, { order: [23] })).toThrowError('order: invalid filename given');
+                expect(() => requireDir('./__tests__/mocks/validDir', false, { order: [{}] })).toThrowError('order: invalid filename given');
+                expect(() => requireDir('./__tests__/mocks/validDir', false, { order: [[]] })).toThrowError('order: invalid filename given');
+                expect(() => requireDir('./__tests__/mocks/validDir', false, { order: [true] })).toThrowError('order: invalid filename given');
+                expect(() => requireDir('./__tests__/mocks/validDir', false, { order: [false] })).toThrowError('order: invalid filename given');
+            });
+
+            it('should throw error if options.order contains a non-existing filename', () => {
+                expect(() => requireDir('./__tests__/mocks/validDir', false, { order: ['invalidFile'] })).toThrowError('order: invalidFile does not exist');
+            });
+
+            it('should throw error when undefined variable is referenced', () => {
+                expect(() => requireDir('./__tests__/mocks/depenDir/deep/')).toThrowError('ReferenceError: invalid is not defined \n this might be because file, which defined the variable, have not executed yet');
+
+            });
+
+            it('should throw error when variable defined, in another file that is not executed yet, is referenced', () => {
+                expect(() => requireDir('./__tests__/mocks/depenDir/')).toThrowError('ReferenceError: midvar is not defined \n this might be because file, which defined the variable, have not executed yet');
+
+            });
+        });
+
+        describe('On Success', () => {
+            it('should have properties of mock object in returning object', () => {
+                const mocks = {
+                    editor: 'vscode',
+                    hotel: 'trivago'
+                };
+                const onejs = 'function uno() {\n    console.log(\'uno\');\n}';
+                const result = requireDir('./__tests__/mocks/validDir/', false, { mocks: mocks });
+
+                expect(result).toHaveProperty('editor');
+                expect(result.editor).toBe(mocks.editor);
+                expect(result).toHaveProperty('hotel');
+                expect(result.hotel).toBe(mocks.hotel);
+                expect(result).toHaveProperty('uno');
+                expect(result.uno.toString()).toBe(onejs);
+            });
+            it('should execute dependant file without error', () => {
+                let result;
+                expect(() => result = requireDir('./__tests__/mocks/depenDir/deep/', false, {
+                    order: [
+                        './__tests__/mocks/depenDir/deep/second.js',
+                        './__tests__/mocks/depenDir/deep/first.js'
+                    ]
+                })).not.toThrowError();
+
+                expect(result).toHaveProperty('invalid');
+                expect(result.invalid).toBe('mock');
+                expect(result).toHaveProperty('single');
+                expect(result.single).toBe('mock');
+            });
+            it('should execute files in order', () => {
+                let result;
+                expect(() => result = requireDir('./__tests__/mocks/depenDir/', false, {
+                    order: [
+                        './__tests__/mocks/depenDir/top.js',
+                        './__tests__/mocks/depenDir/mid.js'
+                    ]
+                })).not.toThrowError();
+
+                expect(result).toHaveProperty('topvar');
+                expect(result.topvar).toBe('top');
+                expect(result).toHaveProperty('topfun');
+                expect(result.topfun()).toBe('top');
+                expect(result).toHaveProperty('midvar');
+                expect(result.midvar).toBe('mid');
+                expect(result).toHaveProperty('midfun');
+                expect(result.midfun()).toBe('top');
+                expect(result).toHaveProperty('secfun');
+                expect(result.secfun()).toBe(true);
+                expect(result).toHaveProperty('botvar');
+                expect(result.botvar).toBe('mid');
+                expect(result).toHaveProperty('botfun');
+                expect(result.botfun()).toBe('yin');
+                expect(result).toHaveProperty('lastfun');
+                expect(result.lastfun()).toBe('top');
+
+            })
+        });
     });
 });
