@@ -10,7 +10,7 @@
 const fs = require('fs');
 const vm = require('vm');
 const path = require('path')
-module.exports = (directory, recursion, options) => {
+module.exports = (directory, recursion = false, options = {}) => {
     if (typeof directory !== 'string') throw Error(`dirName: Expected string, ${typeof directory} given`);
     if (!(fs.existsSync(directory) && fs.statSync(directory).isDirectory())) throw Error('dirName: Directory not found');
     if (typeof recursion !== 'boolean') throw Error(`recursion: Expected boolean, ${typeof recursion} given`);
