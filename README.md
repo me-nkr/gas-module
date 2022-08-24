@@ -2,7 +2,7 @@
 
 ![npm](https://img.shields.io/npm/v/gas-module) [![GitHub license](https://img.shields.io/github/license/me-nkr/gas-module)](https://github.com/me-nkr/gas-module/blob/main/LICENSE) [![GitHub issues](https://img.shields.io/github/issues/me-nkr/gas-module)](https://github.com/me-nkr/gas-module/issues)
 
-import local google appscript files written with `.js` or `.ts` extension for testing
+Run your google appscript code on your local machine for testing
 
 ## Install
 
